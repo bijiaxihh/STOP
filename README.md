@@ -7,7 +7,7 @@
 Official implementation for **"Cut Your Losses! Learning to Prune Paths Early for Efficient Parallel Reasoning"**.
 
 <p align="center">
-<a href="https://github.com/tongxuluo/LeaP/blob/main/LICENSE">
+<a href="[https://github.com/tongxuluo/LeaP/blob/main/LICENSE">
 <img src='https://img.shields.io/badge/License-Apache_2.0-green.svg' alt='License: Apache 2.0'></a>
 <img src='https://img.shields.io/badge/Python-3.10+-blue.svg' alt='Python 3.12+'>
 <a href="https://arxiv.org/abs/2505.07787" target="_blank">
