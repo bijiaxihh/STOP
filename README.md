@@ -145,15 +145,4 @@ The actual inference code is:
 
 This script expects local runtime assets such as model weights, tokenizer assets, tiktoken encodings, and classifier checkpoints.
 
-## Citation
-
-If you find this repository useful, please cite:
-
-```bibtex
-@article{bi2026cut,
-  title={Cut Your Losses! Learning to Prune Paths Early for Efficient Parallel Reasoning},
-  author={Bi, Jiaxi and Luo, Tongxu and Du, Wenyu and Tang, Zhengyang and Wang, Benyou},
-  journal={arXiv preprint arXiv:2505.07787},
-  year={2025}
-}
 ```
