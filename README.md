@@ -154,7 +154,7 @@ If you find this repository useful, please cite:
 @article{bi2026cut,
   title={Cut Your Losses! Learning to Prune Paths Early for Efficient Parallel Reasoning},
   author={Bi, Jiaxi and Luo, Tongxu and Du, Wenyu and Tang, Zhengyang and Wang, Benyou},
-  journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2026}
+  journal={arXiv preprint arXiv:2505.07787},
+  year={2025}
 }
 ```
