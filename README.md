@@ -145,4 +145,3 @@ The actual inference code is:
 
 This script expects local runtime assets such as model weights, tokenizer assets, tiktoken encodings, and classifier checkpoints.
 
-```
