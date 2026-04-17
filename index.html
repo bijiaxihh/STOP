@@ -1,70 +1,436 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>STOP: Early Path Pruning</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STOP: Cut Your Losses!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: Arial;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      line-height: 1.6;
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #2563eb;
+      --accent-soft: #eff6ff;
+      --card: #f8fafc;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --maxw: 1100px;
     }
-    h1 { color: #222; }
-    .buttons a {
-      margin-right: 10px;
-      padding: 8px 12px;
-      background: #eee;
-      text-decoration: none;
-      border-radius: 5px;
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 auto 12px;
+      max-width: 980px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      margin: 0 auto 20px;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .authors {
+      max-width: 920px;
+      margin: 0 auto 10px;
+      font-size: 0.98rem;
+    }
+
+    .affiliations {
+      max-width: 920px;
+      margin: 0 auto 22px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: white;
+      font-weight: 700;
+      color: var(--text);
+      box-shadow: var(--shadow);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .section {
+      padding: 42px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+    }
+
+    .lede {
+      font-size: 1.03rem;
+      color: var(--muted);
+      max-width: 900px;
+    }
+
+    .callout {
+      margin-top: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .figure {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 10px;
+    }
+
+    .figure img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat .num {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .stat .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.96rem;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 800;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    .best { font-weight: 800; color: #065f46; }
+
+    .codebox {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 18px;
+      padding: 18px;
+      overflow-x: auto;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      padding: 32px 0 56px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    ul.clean {
+      padding-left: 20px;
+      margin: 10px 0 0;
+    }
+
+    @media (max-width: 860px) {
+      .grid-2, .stats {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding-top: 42px; }
+      h1 { font-size: 2.2rem; }
     }
   </style>
 </head>
-
 <body>
+  <header class="hero">
+    <div class="container">
+      <div class="badge">ACL 2026</div>
+      <h1><em>Cut Your Losses!</em> Learning to Prune Paths Early for Efficient Parallel Reasoning</h1>
+      <p class="subtitle">
+        STOP is a lightweight internal pruning module that reads KV-cache states and filters unpromising reasoning paths early, improving both accuracy and efficiency in parallel reasoning.
+      </p>
+      <div class="authors">
+        Jiaxi Bi, Tongxu Luo, Wenyu Du, Zhengyang Tang, Benyou Wang
+      </div>
+      <div class="affiliations">
+        The Chinese University of Hong Kong, Shenzhen · Shenzhen Loop Area Institute · USTB · DualityRL
+      </div>
+      <div class="buttons">
+        <a class="btn primary" href="#">📄 Paper</a>
+        <a class="btn" href="https://github.com/bijiaxihh/STOP">💻 Code</a>
+        <a class="btn" href="#results">📊 Results</a>
+        <a class="btn" href="#citation">📚 Citation</a>
+      </div>
+    </div>
+  </header>
 
-<h1>Cut Your Losses!</h1>
-<h3>Learning to Prune Paths Early for Efficient Parallel Reasoning</h3>
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>TL;DR</h2>
+        <p class="lede">
+          Parallel reasoning is powerful but wasteful: many trajectories are already doomed from their early prefixes. STOP appends a single special token to the cached prefix states, predicts whether a path is promising, and prunes low-value paths before they consume more compute.
+        </p>
+        <div class="stats">
+          <div class="stat"><span class="num">70%+</span><span class="label">Token reduction in many settings</span></div>
+          <div class="stat"><span class="num">1.5B–20B</span><span class="label">Model scales evaluated</span></div>
+          <div class="stat"><span class="num">43</span><span class="label">AIMO3 competition score with tool use</span></div>
+        </div>
+      </div>
+    </section>
 
-<p>
-Jiaxi Bi, Tongxu Luo, Zhengyang Tang, Benyou Wang
-</p>
+    <section class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Why prune early?</h2>
+          <p class="lede">
+            In standard parallel reasoning, every sampled path is generated to completion and then aggregated. But many paths fail due to early mistakes and still consume equal compute. Worse, they can pollute the final vote.
+          </p>
+          <div class="callout">
+            <strong>Key insight.</strong> Early-prefix failure is often irreversible. The right question is not how to verify a finished trajectory, but how to stop a bad one early.
+          </div>
+        </div>
+        <div class="figure">
+          <img src="figures/figure1.png" alt="Motivation figure">
+          <div class="caption">Figure 1. Early errors often lead to irreversible failure; pruning them early both saves compute and improves aggregation quality.</div>
+        </div>
+      </div>
+    </section>
 
-<div class="buttons">
-  <a href="#">📄 Paper</a>
-  <a href="#">💻 Code</a>
-</div>
+    <section class="section">
+      <div class="container">
+        <h2>A unified view of path pruning</h2>
+        <p class="lede">
+          We organize prior work by two axes: whether the pruning signal comes from <strong>internal</strong> or <strong>external</strong> states, and whether it is <strong>learnable</strong> or not. This taxonomy reveals an unexplored sweet spot: <strong>learnable internal pruning</strong>.
+        </p>
+        <div class="figure" style="margin-top:18px;">
+          <img src="figures/figure2.png" alt="Taxonomy figure">
+          <div class="caption">Figure 2. STOP instantiates Type IV: learnable internal pruning.</div>
+        </div>
+      </div>
+    </section>
 
-<hr>
+    <section class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Method: STOP</h2>
+          <p class="lede">
+            STOP is a lightweight, non-invasive module built on top of a frozen reasoning model. It appends a special <code>[STOP]</code> token, reads the prefix KV cache, and predicts whether the trajectory should be resumed.
+          </p>
+          <ul class="clean">
+            <li><strong>Launch:</strong> generate short prefixes and cache internal states.</li>
+            <li><strong>Check:</strong> append <code>[STOP]</code> and score each prefix using a small adapter.</li>
+            <li><strong>Resume:</strong> keep only the top-ranked candidates and continue generation.</li>
+          </ul>
+          <div class="callout">
+            <strong>Why it is efficient.</strong> STOP avoids re-encoding the full context. It directly reuses the heavy computation already stored in the KV cache.
+          </div>
+        </div>
+        <div class="figure">
+          <img src="figures/figure3.png" alt="STOP framework">
+          <div class="caption">Figure 3. Launch–Check–Resume: cache prefixes, score them with STOP, and resume only the most promising paths.</div>
+        </div>
+      </div>
+    </section>
 
-<h2>TL;DR</h2>
-<p>
-STOP introduces a lightweight module that prunes unpromising reasoning paths early, reducing token usage while improving accuracy.
-</p>
+    <section class="section" id="results">
+      <div class="container">
+        <h2>Key results</h2>
+        <p class="lede">
+          STOP consistently improves effectiveness and efficiency across reasoning models from 1.5B to 20B. It also generalizes beyond standard benchmarks to realistic tool-use settings.
+        </p>
+        <div class="grid-2" style="margin-top:16px;">
+          <div class="card">
+            <h3>Main takeaway</h3>
+            <table>
+              <thead>
+                <tr><th>Setting</th><th>Result</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>AIME24 (1.5B)</td><td>30.10 → <span class="best">37.92</span></td></tr>
+                <tr><td>Token usage</td><td><span class="best">> 70% reduction</span></td></tr>
+                <tr><td>Scalability</td><td>Robust across varying compute budgets</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3>AIMO3 competition with tool use</h3>
+            <table>
+              <thead>
+                <tr><th>Method</th><th>Score</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Baseline + Tool</td><td>39</td></tr>
+                <tr><td>STOP (24→8)</td><td>42</td></tr>
+                <tr><td>STOP (16→8)</td><td class="best">43</td></tr>
+              </tbody>
+            </table>
+            <div class="caption">The best setting reaches silver-level performance on the public leaderboard.</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>Motivation</h2>
-<p>
-Most reasoning paths are doomed from early stages. We aim to detect and prune them efficiently.
-</p>
+    <section class="section">
+      <div class="container grid-2">
+        <div>
+          <h2>Scaling law for deployment</h2>
+          <p class="lede">
+            Beyond a single method, STOP also provides a practical deployment rule. We derive an empirical guideline that predicts the optimal retention ratio based on compute budget, prefix length, and task length.
+          </p>
+          <div class="callout">
+            <strong>Why it matters.</strong> Practitioners can choose pruning aggressiveness without exhaustive sweeps, making STOP practical under real resource constraints.
+          </div>
+        </div>
+        <div class="figure">
+          <img src="figures/figure6.png" alt="Scaling law figure">
+          <div class="caption">Figure 6. The inverse retention ratio follows a stable empirical trend across settings.</div>
+        </div>
+      </div>
+    </section>
 
-<h2>Method</h2>
-<p>
-We introduce a special token [STOP] that reads internal KV cache states and predicts prefix quality.
-</p>
+    <section class="section">
+      <div class="container">
+        <h2>Abstract</h2>
+        <p class="lede">
+          Parallel reasoning enhances Large Reasoning Models (LRMs) but incurs prohibitive costs due to futile paths caused by early errors. To mitigate this, path pruning at the prefix level is essential, yet existing research remains fragmented without a standardized framework. We propose the first systematic taxonomy of path pruning, identify learnable internal pruning as a missing paradigm, and instantiate it with STOP (Super TOken for Pruning). Extensive evaluations across LRMs ranging from 1.5B to 20B demonstrate that STOP improves both effectiveness and efficiency. We further validate its scalability under varying compute budgets and distill these observations into practical deployment guidelines.
+        </p>
+      </div>
+    </section>
 
-<h2>Results</h2>
-<p>
-On AIMO3 competition, STOP improves score from 39 to 43 (Silver-level).
-</p>
+    <section class="section" id="citation">
+      <div class="container">
+        <h2>Citation</h2>
+        <div class="codebox"><pre>@article{bi2026cut,
+  title={Cut Your Losses! Learning to Prune Paths Early for Efficient Parallel Reasoning},
+  author={Bi, Jiaxi and Luo, Tongxu and Du, Wenyu and Tang, Zhengyang and Wang, Benyou},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2026}
+}</pre></div>
+      </div>
+    </section>
+  </main>
 
-<h2>Citation</h2>
-<pre>
-@article{yourpaper2026,
-  title={Cut Your Losses!},
-  author={...}
-}
-</pre>
-
+  <footer class="footer">
+    <div class="container">
+      Project page adapted for STOP. Replace placeholder paper links and figure paths before publishing.
+    </div>
+  </footer>
 </body>
 </html>
