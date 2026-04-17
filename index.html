@@ -272,7 +272,7 @@
         The Chinese University of Hong Kong, Shenzhen · Shenzhen Loop Area Institute · USTB · DualityRL
       </div>
       <div class="buttons">
-        <a class="btn primary" href="#">📄 Paper</a>
+        <a class="btn primary" href="../Prefix_Rejection____DFT___ACL26_-61.pdf">📄 Paper</a>
         <a class="btn" href="https://github.com/bijiaxihh/STOP">💻 Code</a>
         <a class="btn" href="#results">📊 Results</a>
         <a class="btn" href="#citation">📚 Citation</a>
@@ -355,6 +355,10 @@
         <p class="lede">
           STOP consistently improves effectiveness and efficiency across reasoning models from 1.5B to 20B. It also generalizes beyond standard benchmarks to realistic tool-use settings.
         </p>
+        <div class="figure" style="margin-top:18px;">
+          <img src="figures/main-table.png" alt="Main results table">
+          <div class="caption">Main benchmark results. STOP consistently outperforms existing pruning baselines while reducing token usage.</div>
+        </div>
         <div class="grid-2" style="margin-top:16px;">
           <div class="card">
             <h3>Main takeaway</h3>
@@ -364,8 +368,8 @@
               </thead>
               <tbody>
                 <tr><td>AIME24 (1.5B)</td><td>30.10 → <span class="best">37.92</span></td></tr>
+                <tr><td>GPT-OSS-20B on AIME25</td><td>84 → <span class="best">~90</span></td></tr>
                 <tr><td>Token usage</td><td><span class="best">> 70% reduction</span></td></tr>
-                <tr><td>Scalability</td><td>Robust across varying compute budgets</td></tr>
               </tbody>
             </table>
           </div>
