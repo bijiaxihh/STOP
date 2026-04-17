@@ -146,19 +146,6 @@ The actual inference code is:
 
 This script expects local runtime assets such as model weights, tokenizer assets, tiktoken encodings, and classifier checkpoints.
 
-## Evaluation
-
-For scoring prefix records with a vLLM classify endpoint:
-
-```bash
-python STOP/src/evaluate_harmony_vllm.py \
-  --input-jsonl INPUT.jsonl \
-  --output-jsonl OUTPUT.jsonl \
-  --summary-json SUMMARY.json \
-  --num-assess-tokens N \
-  --assess-special-token-id TOKEN_ID
-```
-
 ## Citation
 
 If you find this repository useful, please cite:
