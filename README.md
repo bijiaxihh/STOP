@@ -9,8 +9,8 @@ Official implementation for **"Cut Your Losses! Learning to Prune Paths Early fo
 <a href="https://github.com/bijiaxihh/STOP/blob/main/LICENSE">
 <img src='https://img.shields.io/badge/License-Apache_2.0-green.svg' alt='License: Apache 2.0'></a>
 <img src='https://img.shields.io/badge/Python-3.12+-blue.svg' alt='Python 3.12+'>
-<a href="https://arxiv.org/abs/2505.07787" target="_blank">
-<img src="https://img.shields.io/badge/arXiv-2505.07787-b31b1b.svg" alt="arXiv:2505.07787"></a>
+<!-- <a href="https://arxiv.org/abs/2505.07787" target="_blank">
+<img src="https://img.shields.io/badge/arXiv-2505.07787-b31b1b.svg" alt="arXiv:2505.07787"></a> -->
 <a href="https://huggingface.co/Learning-from-Peers" target="_blank">
 <img src="https://img.shields.io/badge/🤗%20Hugging%20Face-Models%20%26%20Datasets-yellow.svg" alt="Hugging Face Models & Datasets"></a>
 </p>
