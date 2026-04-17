@@ -19,7 +19,7 @@ Official implementation for **"Cut Your Losses! Learning to Prune Paths Early fo
 <!-- <a href="https://bijiaxihh.github.io/STOP/" target="_blank">🌐 Project Page</a> • -->
 <a href="https://github.com/bijiaxihh/STOP/tree/main target="_blank">💻 Code</a> •
 <!-- <a href="https://arxiv.org/abs/2505.07787" target="_blank">📃 Paper</a> • -->
-<a href="https://github.com/bijiaxihh/STOP?tab=readme-ov-file" target="_blank">🤗 Datasets & Models</a>
+<a href="https://huggingface.co/STOP-project" target="_blank">🤗 Datasets & Models</a>
 </p>
 
 ## Overview
