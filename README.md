@@ -67,19 +67,6 @@ In standard parallel reasoning, every sampled path is usually generated to compl
   <img src="./figures/motivation.png" width="88%" alt="STOP Motivation">
 </p>
 
-## Results
-
-STOP consistently improves both effectiveness and efficiency.
-
-* On **AIME24 (1.5B)**, performance improves from `30.10` to `37.92`.
-* Under fixed compute budgets, STOP boosts **GPT-OSS-20B** accuracy on **AIME25** from `84%` to nearly `90%`.
-* In many setups, STOP reduces token consumption by **over 70%**.
-* In the **AIMO3** tool-use setting, STOP improves the score from `39` to `42` and `43` in the reported configurations.
-
-<p align="center">
-  <img src="./figures/scaling_main.png" width="88%" alt="STOP Scaling">
-</p>
-
 ## Repository Structure
 
 ```text
@@ -117,6 +104,8 @@ You will also need to prepare your own:
 * tokenizer files
 * STOP checkpoints
 * local runtime assets under the paths expected by the scripts
+
+For empirical results and figures, please refer to the [project page](./index.html).
 
 ## Training
 
