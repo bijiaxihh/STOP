@@ -331,7 +331,7 @@
         <div>
           <h2>Method: STOP</h2>
           <p class="lede">
-            STOP is a lightweight, non-invasive module built on top of a frozen reasoning model. It appends a special <code>[STOP]</code> token, reads the prefix KV cache, and predicts whether the trajectory should be resumed.
+            STOP is a lightweight, non-invasive module built on top of a frozen reasoning model. Instead of re-encoding the full text, it appends a short sequence of learnable <code>[STOP]</code> tokens to the cached reasoning prefix, reads the prefix KV cache, and predicts whether the trajectory should be resumed.
           </p>
           <ul class="clean">
             <li><strong>Launch:</strong> generate short prefixes and cache internal states.</li>
