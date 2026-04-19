@@ -285,7 +285,7 @@
       <div class="container">
         <h2>TL;DR</h2>
         <p class="lede">
-          Parallel reasoning is powerful but wasteful: many trajectories are already doomed from their early prefixes. STOP appends a single special token to the cached prefix states, predicts whether a path is promising, and prunes low-value paths before they consume more compute.
+          STOP is a lightweight pruning module that identifies doomed reasoning paths from their early prefixes. It is the first instantiation of learnable internal pruning, improving parallel reasoning accuracy while reducing token usage by over 70% in many settings.
         </p>
         <div class="stats">
           <div class="stat"><span class="num">70%+</span><span class="label">Token reduction in many settings</span></div>
