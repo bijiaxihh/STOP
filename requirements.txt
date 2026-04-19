@@ -1,0 +1,35 @@
+# Core requirements for STOP
+# to keep only the core packages used by this repository.
+#
+# Python version used in the source environment: 3.12.12
+#
+# Important:
+# - We do NOT pin `vllm` from PyPI here.
+# - This project relies on a modified local vLLM source bundle shipped in:
+#     STOP/vllm/vllm.tar.gz
+# - Please extract and build/install that customized vLLM version separately.
+
+accelerate==1.11.0
+deepspeed==0.18.8
+ipykernel==7.2.0
+ipython==9.10.0
+jupyter_client==8.8.0
+nbconvert==7.17.0
+nbformat==5.10.4
+numpy==2.4.4
+openai==2.14.0
+openai-harmony==0.0.8
+pandas==2.3.3
+peft==0.14.0
+polars==1.38.1
+safetensors==0.5.3
+sentencepiece==0.2.1
+tiktoken==0.12.0
+torch==2.10.0
+torchaudio==2.10.0
+torchvision==0.25.0
+tqdm==4.67.1
+transformers==4.57.6
+
+# Optional but commonly needed for local model loading / tokenizer backends.
+tokenizers==0.22.1
